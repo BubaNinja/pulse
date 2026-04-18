@@ -275,7 +275,27 @@ footer{grid-template-columns:1fr;padding:40px 20px 20px}
 </style>
     <script type="application/ld+json">
     {"@context":"https://schema.org","@type":"SportsActivityLocation","name":"PULSE","image":"images/hero-bg.png","address":{"@type":"PostalAddress","streetAddress":"ул. Тверская 24","addressLocality":"Москва","addressCountry":"RU"},"telephone":"+7 (495) 123-45-67"}
-    </script>
+    
+// Trial signup
+function submitTrial(){
+  var name=document.getElementById('trialName').value;
+  var phone=document.getElementById('trialPhone').value;
+  var prog=document.getElementById('trialProg').value;
+  if(!name||!phone){return}
+
+  /* === TELEGRAM BOT API ===
+  var text='Пробная тренировка PULSE:%0AIмя: '+name+'%0AТел: '+phone+'%0AНаправление: '+(prog||'не выбрано');
+  fetch('https://api.telegram.org/bot'+BOT_TOKEN+'/sendMessage?chat_id='+CHAT_ID+'&text='+text);
+  === END === */
+
+  document.getElementById('successModal').querySelector('.modal-title').textContent='Записан на тренировку';
+  document.getElementById('successModal').querySelector('.modal-text').textContent='Мы свяжемся с тобой для подтверждения времени. До встречи в зале!';
+  document.getElementById('successModal').classList.add('active');
+  document.getElementById('trialName').value='';
+  document.getElementById('trialPhone').value='';
+  document.getElementById('trialProg').value='';
+}
+</script>
 </head>
 <body>
 
@@ -530,6 +550,31 @@ footer{grid-template-columns:1fr;padding:40px 20px 20px}
   </div>
 </section>
 
+
+<!-- ========== TRIAL ========== -->
+<section id="trial" style="border-top:1px solid rgba(200,255,0,.08)">
+  <div class="stag rv">Пробная тренировка</div>
+  <div class="stitle rv">Первый шаг — <span class="a">бесплатно</span></div>
+  <div style="max-width:600px" class="rv">
+    <p style="color:var(--light-gray);font-size:17px;line-height:1.8;margin-bottom:28px">Запишись на бесплатную пробную тренировку. Выбери направление, а мы подберём группу и тренера под твой уровень.</p>
+    <div style="display:flex;flex-direction:column;gap:14px;background:var(--card);border:1px solid rgba(200,255,0,.08);padding:32px">
+      <div style="display:flex;gap:14px;flex-wrap:wrap">
+        <input type="text" id="trialName" placeholder="Имя" style="flex:1;min-width:200px;background:var(--dark);border:1px solid rgba(200,255,0,.1);color:var(--white);font-family:var(--font-body);font-size:15px;padding:14px 16px;outline:none">
+        <input type="tel" id="trialPhone" placeholder="Телефон" style="flex:1;min-width:200px;background:var(--dark);border:1px solid rgba(200,255,0,.1);color:var(--white);font-family:var(--font-body);font-size:15px;padding:14px 16px;outline:none">
+      </div>
+      <select id="trialProg" style="background:var(--dark);border:1px solid rgba(200,255,0,.1);color:var(--white);font-family:var(--font-body);font-size:15px;padding:14px 16px;outline:none;appearance:none;cursor:pointer">
+        <option value="">Выбери направление</option>
+        <option>CrossFit WOD</option>
+        <option>Strength Lab</option>
+        <option>Combat Box</option>
+        <option>Mobility Flow</option>
+        <option>Metcon Burn</option>
+      </select>
+      <button onclick="submitTrial()" style="padding:16px;background:var(--lime);color:var(--black);font-family:var(--font-ui);font-size:18px;font-weight:600;letter-spacing:4px;text-transform:uppercase;border:none;cursor:pointer;transition:.3s;clip-path:polygon(0 0,calc(100% - 14px) 0,100% 14px,100% 100%,14px 100%,0 calc(100% - 14px))">Записаться бесплатно</button>
+    </div>
+  </div>
+</section>
+
 <!-- ========== CTA ========== -->
 <section class="cta-sec">
   <div class="cta-glow"></div>
@@ -636,58 +681,10 @@ function upd(){
   document.querySelectorAll('.add-btn').forEach(b=>{
     const c2=b.closest('.prcard');if(!c2)return;
     const n=c2.dataset.name,has=cart.some(x=>x.name===n);
-    b.textContent=has?'Добавлено':'В корзину';b.classList.toggle('added',has);
+    if(has){b.textContent='Перейти в корзину';b.classList.add('added');b.onclick=function(){toggleCart()}}else{b.textContent='В корзину';b.classList.remove('added');b.onclick=null}
   });
 }
 function addToCart(n,pt,p){if(cart.some(x=>x.name===n))return;cart.push({name:n,pt,p});upd();
-
-// Max icon
-document.getElementById("maxIcon").src="data:image/jpeg;base64,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";
-
-// Scroll to top
-window.addEventListener("scroll",()=>{
-  document.getElementById("scrollTop").classList.toggle("visible",window.scrollY>500);
-});
-
-// Checkout form
-function showCheckout(){
-  document.getElementById('checkoutBtn').style.display='none';
-  document.getElementById('checkoutForm').classList.add('show');
-}
-function hideCheckout(){
-  document.getElementById('checkoutBtn').style.display='';
-  document.getElementById('checkoutForm').classList.remove('show');
-}
-function submitOrder(){
-  const name=document.getElementById('cfName').value;
-  const phone=document.getElementById('cfPhone').value;
-  if(!name||!phone){return}
-
-  /* === TELEGRAM BOT API ===
-  const BOT_TOKEN='YOUR_BOT_TOKEN';
-  const CHAT_ID='YOUR_CHAT_ID';
-  const items=cart.map(c=>c.name+' '+c.pt).join(', ');
-  const total=cart.reduce((s,c)=>s+c.p,0);
-  const email=document.getElementById('cfEmail').value||'-';
-  const text='Заказ PULSE:%0A'+
-    'Имя: '+name+'%0AТел: '+phone+'%0AEmail: '+email+'%0A'+
-    'Абонементы: '+items+'%0AИтого: '+total+' P';
-  fetch('https://api.telegram.org/bot'+BOT_TOKEN+'/sendMessage?chat_id='+CHAT_ID+'&text='+text);
-  === END === */
-
-  toggleCart();
-  hideCheckout();
-  document.getElementById('successModal').classList.add('active');
-  cart=[];upd();
-  ['cfName','cfPhone','cfEmail'].forEach(id=>{document.getElementById(id).value=''});
-}
-function closeModal(e){if(e.target===e.currentTarget)e.currentTarget.classList.remove('active')}
-
-// Smooth scroll
-document.querySelectorAll('a[href^="#"]').forEach(a=>{
-  a.addEventListener('click',function(e){e.preventDefault();const t=document.querySelector(this.getAttribute('href'));if(t)t.scrollIntoView({behavior:'smooth'})});
-});
-
   const b=document.querySelector('.cart-btn');b.style.boxShadow='0 0 30px var(--lime)';setTimeout(()=>b.style.boxShadow='none',400);
 }
 function rem(i){cart.splice(i,1);upd()}
@@ -712,6 +709,51 @@ function hideCheckout(){
   document.getElementById('checkoutForm').classList.remove('show');
 }
 function submitOrder(){
+  var name=document.getElementById('cfName').value;
+  var phone=document.getElementById('cfPhone').value;
+  if(!name||!phone){return}
+
+  /* === TELEGRAM BOT API ===
+  var BOT_TOKEN='YOUR_BOT_TOKEN';
+  var CHAT_ID='YOUR_CHAT_ID';
+  var items=cart.map(function(c){return c.name+' '+c.pt}).join(', ');
+  var total=cart.reduce(function(s,c){return s+c.p},0);
+  var email=document.getElementById('cfEmail').value||'-';
+  var text='Заказ PULSE:%0AIмя: '+name+'%0AТел: '+phone+'%0AEmail: '+email+'%0AАбонементы: '+items+'%0AИтого: '+total+' P';
+  fetch('https://api.telegram.org/bot'+BOT_TOKEN+'/sendMessage?chat_id='+CHAT_ID+'&text='+text);
+  === END === */
+
+  toggleCart();
+  hideCheckout();
+  document.getElementById('successModal').classList.add('active');
+  cart=[];upd();
+  ['cfName','cfPhone','cfEmail'].forEach(function(id){document.getElementById(id).value=''});
+}
+function closeModal(e){if(e.target===e.currentTarget)e.currentTarget.classList.remove('active')}
+
+// Smooth scroll
+document.querySelectorAll('a[href^="#"]').forEach(function(a){
+  a.addEventListener('click',function(e){e.preventDefault();var t=document.querySelector(this.getAttribute('href'));if(t)t.scrollIntoView({behavior:'smooth'})});
+});
+
+// Max icon
+document.getElementById("maxIcon").src="data:image/jpeg;base64,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";
+
+// Scroll to top
+window.addEventListener("scroll",()=>{
+  document.getElementById("scrollTop").classList.toggle("visible",window.scrollY>500);
+});
+
+// Checkout form
+function showCheckout(){
+  document.getElementById('checkoutBtn').style.display='none';
+  document.getElementById('checkoutForm').classList.add('show');
+}
+function hideCheckout(){
+  document.getElementById('checkoutBtn').style.display='';
+  document.getElementById('checkoutForm').classList.remove('show');
+}
+function submitOrder(){
   const name=document.getElementById('cfName').value;
   const phone=document.getElementById('cfPhone').value;
   if(!name||!phone){return}
@@ -741,6 +783,26 @@ document.querySelectorAll('a[href^="#"]').forEach(a=>{
   a.addEventListener('click',function(e){e.preventDefault();const t=document.querySelector(this.getAttribute('href'));if(t)t.scrollIntoView({behavior:'smooth'})});
 });
 
+
+// Trial signup
+function submitTrial(){
+  var name=document.getElementById('trialName').value;
+  var phone=document.getElementById('trialPhone').value;
+  var prog=document.getElementById('trialProg').value;
+  if(!name||!phone){return}
+
+  /* === TELEGRAM BOT API ===
+  var text='Пробная тренировка PULSE:%0AIмя: '+name+'%0AТел: '+phone+'%0AНаправление: '+(prog||'не выбрано');
+  fetch('https://api.telegram.org/bot'+BOT_TOKEN+'/sendMessage?chat_id='+CHAT_ID+'&text='+text);
+  === END === */
+
+  document.getElementById('successModal').querySelector('.modal-title').textContent='Записан на тренировку';
+  document.getElementById('successModal').querySelector('.modal-text').textContent='Мы свяжемся с тобой для подтверждения времени. До встречи в зале!';
+  document.getElementById('successModal').classList.add('active');
+  document.getElementById('trialName').value='';
+  document.getElementById('trialPhone').value='';
+  document.getElementById('trialProg').value='';
+}
 </script>
 </body>
 </html>
