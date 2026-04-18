@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PULSE — Кроссфит & фитнес-студия в Москве | Первая тренировка бесплатно</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%92%AA%3C/text%3E%3C/svg%3E">
+    <meta name="description" content="PULSE — кроссфит и фитнес-студия в Москве. 12 тренеров, 50+ тренировок в неделю, 800м2. Первая тренировка бесплатно.">
+    <meta property="og:title" content="PULSE — Сломай свои лимиты">
+    <meta property="og:description" content="Кроссфит, силовые, бокс, функциональный тренинг. Первая тренировка бесплатно.">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="images/hero-bg.png">
+    <meta property="og:locale" content="ru_RU">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Chakra+Petch:wght@400;600;700&family=Teko:wght@300;400;500;600;700&family=Saira+Stencil+One&family=Saira+Extra+Condensed:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+--black:#080808;--dark:#0f0f0f;--card:#141414;--card-hover:#1a1a1a;
+--lime:#c8ff00;--blue:#00d4ff;--red:#ff2244;--orange:#ff6b1a;
+--white:#ececec;--gray:#555;--light-gray:#888;
+--font-display:'Anton',sans-serif;
+--font-head:'Saira Extra Condensed',sans-serif;
+--font-stencil:'Saira Stencil One',sans-serif;
+--font-body:'Chakra Petch',sans-serif;
+--font-ui:'Teko',sans-serif;
+}
+html{scroll-behavior:smooth}
+body{background:var(--black);color:var(--white);font-family:var(--font-body);overflow-x:hidden;-webkit-font-smoothing:antialiased}
+::selection{background:var(--lime);color:var(--black)}
+
+::-webkit-scrollbar{width:5px}
+::-webkit-scrollbar-track{background:var(--black)}
+::-webkit-scrollbar-thumb{background:var(--lime);border-radius:0}
+
+/* NOISE */
+body::after{
+content:'';position:fixed;inset:0;
+background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+pointer-events:none;z-index:9999
+}
+
+/* LOADER */
+.loader{position:fixed;inset:0;background:var(--black);z-index:10000;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:12px;transition:opacity .5s,visibility .5s}
+.loader.hidden{opacity:0;visibility:hidden}
+.loader-text{font-family:var(--font-stencil);font-size:clamp(50px,14vw,160px);color:var(--lime);animation:loaderFlicker .15s infinite alternate;letter-spacing:8px}
+.loader-bar{width:200px;height:3px;background:rgba(255,255,255,.1);border-radius:0;overflow:hidden}
+.loader-bar-fill{height:100%;background:var(--lime);animation:loaderFill 1s ease-out forwards}
+@keyframes loaderFlicker{0%{opacity:.6;text-shadow:0 0 40px var(--lime)}100%{opacity:1;text-shadow:0 0 100px var(--lime),0 0 200px rgba(200,255,0,.2)}}
+@keyframes loaderFill{0%{width:0}100%{width:100%}}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;width:100%;z-index:100;padding:18px 40px;display:flex;justify-content:space-between;align-items:center;backdrop-filter:blur(16px) saturate(1.2);background:rgba(8,8,8,.75);border-bottom:1px solid rgba(200,255,0,.07)}
+.logo{font-family:var(--font-stencil);font-size:32px;color:var(--lime);text-shadow:0 0 30px rgba(200,255,0,.35);cursor:pointer;text-decoration:none;letter-spacing:3px}
+.logo em{font-style:normal;color:var(--red)}
+.nav-links{display:flex;gap:28px;align-items:center}
+.nav-links a{color:var(--white);text-decoration:none;font-family:var(--font-ui);font-size:18px;letter-spacing:3px;text-transform:uppercase;position:relative;transition:.3s;opacity:.7}
+.nav-links a::after{content:'';position:absolute;bottom:-3px;left:0;width:0;height:2px;background:var(--lime);transition:.3s}
+.nav-links a:hover{opacity:1;color:var(--lime)}
+.nav-links a:hover::after{width:100%}
+
+.cart-btn{position:relative;background:none;border:2px solid var(--lime);color:var(--lime);font-family:var(--font-ui);font-size:17px;letter-spacing:3px;text-transform:uppercase;padding:9px 22px;cursor:pointer;transition:.3s;clip-path:polygon(0 0,calc(100% - 10px) 0,100% 10px,100% 100%,10px 100%,0 calc(100% - 10px))}
+.cart-btn:hover{background:var(--lime);color:var(--black)}
+.cart-count{position:absolute;top:-9px;right:-9px;background:var(--red);color:#fff;width:21px;height:21px;border-radius:50%;font-size:11px;display:flex;align-items:center;justify-content:center;font-family:var(--font-body);font-weight:700}
+.cart-count.empty{display:none}
+
+/* ====================== HERO ====================== */
+.hero{height:100vh;display:flex;align-items:center;position:relative;overflow:hidden;padding:0 60px}
+.hero-bg-img{position:absolute;inset:0;background:url('images/hero-bg.png') center/cover no-repeat;opacity:.35}
+.hero-bg-img::after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,rgba(8,8,8,.95) 0%,rgba(8,8,8,.5) 50%,rgba(8,8,8,.8) 100%)}
+.hero-scanlines{position:absolute;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,.06) 2px,rgba(0,0,0,.06) 4px);pointer-events:none;z-index:1}
+.hero-grid{position:absolute;inset:0;
+  background-image:linear-gradient(rgba(200,255,0,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(200,255,0,.025) 1px,transparent 1px);
+  background-size:80px 80px;animation:gridDrift 30s linear infinite;z-index:1}
+@keyframes gridDrift{0%{transform:translateY(0)}100%{transform:translateY(80px)}}
+.hero-glow{position:absolute;bottom:-200px;left:-100px;width:600px;height:600px;background:radial-gradient(circle,rgba(200,255,0,.1),transparent 70%);border-radius:50%;z-index:1;animation:heroGlow 4s ease-in-out infinite alternate}
+@keyframes heroGlow{0%{transform:scale(1);opacity:.6}100%{transform:scale(1.2);opacity:1}}
+
+.hero-content{position:relative;z-index:2;max-width:850px}
+.hero-tag{font-family:var(--font-ui);font-size:20px;letter-spacing:8px;text-transform:uppercase;color:var(--lime);margin-bottom:16px;opacity:0;animation:slideUp .7s .6s forwards}
+.hero-tag::before{content:'';display:inline-block;width:40px;height:2px;background:var(--lime);margin-right:14px;vertical-align:middle}
+.hero h1{font-family:var(--font-display);font-size:clamp(70px,11vw,160px);line-height:.88;letter-spacing:-1px;margin-bottom:24px;opacity:0;animation:slideUp .7s .8s forwards;text-transform:uppercase}
+.hero h1 .glow{color:var(--lime);text-shadow:0 0 50px rgba(200,255,0,.5),0 0 100px rgba(200,255,0,.15)}
+.hero h1 .outline{-webkit-text-stroke:2px rgba(255,255,255,.6);color:transparent}
+.hero-desc{font-family:var(--font-body);font-size:18px;color:var(--light-gray);max-width:480px;line-height:1.7;margin-bottom:36px;opacity:0;animation:slideUp .7s 1s forwards}
+.hero-cta{display:inline-block;padding:18px 54px;background:var(--lime);color:var(--black);font-family:var(--font-ui);font-size:20px;font-weight:600;letter-spacing:4px;text-transform:uppercase;text-decoration:none;clip-path:polygon(0 0,calc(100% - 14px) 0,100% 14px,100% 100%,14px 100%,0 calc(100% - 14px));transition:.3s;opacity:0;animation:slideUp .7s 1.2s forwards}
+.hero-cta:hover{background:var(--blue);box-shadow:0 0 50px rgba(0,212,255,.35);transform:translateY(-2px)}
+
+.hero-stats{position:absolute;right:60px;bottom:80px;z-index:2;display:flex;flex-direction:column;gap:28px;opacity:0;animation:slideUp .7s 1.4s forwards}
+.stat{text-align:right;padding-right:20px;border-right:3px solid var(--lime)}
+.stat-num{font-family:var(--font-display);font-size:64px;color:var(--lime);line-height:1;text-shadow:0 0 25px rgba(200,255,0,.25)}
+.stat-label{font-family:var(--font-ui);font-size:16px;letter-spacing:4px;text-transform:uppercase;color:var(--gray)}
+
+@keyframes slideUp{0%{opacity:0;transform:translateY(40px)}100%{opacity:1;transform:translateY(0)}}
+
+/* ====================== SECTIONS ====================== */
+section{padding:130px 60px;position:relative}
+.stag{font-family:var(--font-ui);font-size:18px;letter-spacing:8px;text-transform:uppercase;color:var(--lime);margin-bottom:10px;display:flex;align-items:center;gap:12px}
+.stag::before{content:'';width:30px;height:2px;background:var(--lime)}
+.stitle{font-family:var(--font-display);font-size:clamp(44px,5.5vw,84px);line-height:.95;margin-bottom:50px;text-transform:uppercase}
+.stitle .a{color:var(--lime)}
+
+/* ====================== ABOUT ====================== */
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+.about-text p{font-size:17px;line-height:1.85;color:var(--light-gray);margin-bottom:18px}
+.numbers-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.ncard{background:var(--card);border:1px solid rgba(200,255,0,.08);padding:36px;transition:.5s;position:relative;overflow:hidden}
+.ncard::before{content:'';position:absolute;top:0;left:0;width:100%;height:2px;background:linear-gradient(90deg,var(--lime),transparent);transform:scaleX(0);transition:.5s;transform-origin:left}
+.ncard:hover::before{transform:scaleX(1)}
+.ncard:hover{border-color:rgba(200,255,0,.25);background:var(--card-hover)}
+.ncard .big{font-family:var(--font-display);font-size:52px;color:var(--lime);line-height:1}
+.ncard .lbl{font-family:var(--font-ui);font-size:15px;letter-spacing:3px;text-transform:uppercase;color:var(--gray);margin-top:6px}
+
+/* ====================== PROGRAMS ====================== */
+.prog-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.pcard{background:var(--card);border:1px solid rgba(255,255,255,.04);overflow:hidden;position:relative;transition:.5s;cursor:pointer}
+.pcard::after{content:'';position:absolute;bottom:0;left:0;width:100%;height:3px;background:var(--lime);transform:scaleX(0);transition:.4s;transform-origin:left}
+.pcard:hover::after{transform:scaleX(1)}
+.pcard:hover{transform:translateY(-6px);border-color:rgba(200,255,0,.2)}
+.pcard-img{width:100%;height:240px;overflow:hidden;position:relative}
+.pcard-img img{width:100%;height:100%;object-fit:cover;transition:.6s;filter:brightness(.8) contrast(1.1)}
+.pcard:hover .pcard-img img{transform:scale(1.08);filter:brightness(.9) contrast(1.15)}
+.pcard-img .pcard-overlay{position:absolute;inset:0;background:linear-gradient(transparent 40%,rgba(8,8,8,.85))}
+.pcard-body{padding:28px}
+.pcard-body h3{font-family:var(--font-head);font-size:36px;font-weight:800;letter-spacing:1px;text-transform:uppercase;line-height:1}
+.pcard-body p{color:var(--gray);font-size:14px;line-height:1.65;margin-top:8px}
+.ptag{display:inline-block;margin-top:14px;padding:4px 14px;border:1px solid var(--lime);font-family:var(--font-ui);font-size:14px;letter-spacing:2px;text-transform:uppercase;color:var(--lime)}
+
+/* ====================== SCHEDULE ====================== */
+.sched-wrap{overflow-x:auto;border:1px solid rgba(200,255,0,.08);background:var(--card)}
+.sched{width:100%;border-collapse:collapse;min-width:820px}
+.sched th{font-family:var(--font-ui);font-size:16px;letter-spacing:4px;text-transform:uppercase;color:var(--black);padding:16px 18px;text-align:left;background:var(--lime)}
+.sched td{padding:14px 18px;border-bottom:1px solid rgba(255,255,255,.04);font-size:14px;color:#999;transition:.3s}
+.sched tbody tr:hover td{background:rgba(200,255,0,.03);color:var(--white)}
+.sched .time{font-family:var(--font-display);font-size:24px;color:var(--white)}
+.sched .trn{color:var(--blue);font-weight:600;font-size:13px}
+.sched .cls{font-family:var(--font-head);font-weight:700;font-size:18px;color:var(--white);text-transform:uppercase}
+
+/* ====================== PRICING ====================== */
+.price-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.prcard{background:var(--card);border:1px solid rgba(255,255,255,.04);padding:48px 36px;position:relative;transition:.5s;overflow:hidden}
+.prcard::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--gray);transition:.4s}
+.prcard:hover{border-color:rgba(200,255,0,.2);transform:translateY(-4px)}
+.prcard:hover::before{background:var(--lime)}
+.prcard.pop{border-color:rgba(200,255,0,.3)}
+.prcard.pop::before{background:var(--lime);height:4px}
+.prcard.pop .badge{position:absolute;top:16px;right:16px;background:var(--red);color:#fff;font-family:var(--font-ui);font-size:13px;letter-spacing:2px;padding:4px 14px;text-transform:uppercase}
+.pr-name{font-family:var(--font-ui);font-size:20px;letter-spacing:5px;text-transform:uppercase;color:var(--gray)}
+.pr-price{font-family:var(--font-display);font-size:72px;color:var(--white);line-height:1;margin:14px 0 4px}
+.pr-price span{font-family:var(--font-ui);font-size:22px;color:var(--gray)}
+.pr-period{font-size:14px;color:var(--gray);margin-bottom:28px;font-family:var(--font-ui);letter-spacing:2px}
+.pr-features{list-style:none;margin-bottom:36px}
+.pr-features li{padding:9px 0 9px 22px;border-bottom:1px solid rgba(255,255,255,.03);font-size:15px;color:var(--light-gray);position:relative}
+.pr-features li::before{content:'//';position:absolute;left:0;color:var(--lime);font-family:var(--font-ui);font-weight:700;font-size:13px}
+.add-btn{width:100%;padding:15px;background:transparent;border:2px solid var(--lime);color:var(--lime);font-family:var(--font-ui);font-size:17px;letter-spacing:4px;text-transform:uppercase;cursor:pointer;transition:.3s;clip-path:polygon(0 0,calc(100% - 10px) 0,100% 10px,100% 100%,10px 100%,0 calc(100% - 10px))}
+.add-btn:hover{background:var(--lime);color:var(--black)}
+.add-btn.added{background:var(--lime);color:var(--black)}
+
+/* ====================== TRAINERS ====================== */
+.train-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.tcard{overflow:hidden;cursor:pointer;position:relative}
+.tcard-photo{width:100%;height:380px;overflow:hidden;position:relative;border:1px solid rgba(255,255,255,.04);transition:.4s}
+.tcard-photo img{width:100%;height:100%;object-fit:cover;object-position:top;transition:.6s;filter:brightness(.75) contrast(1.1) saturate(.9)}
+.tcard:hover .tcard-photo{border-color:var(--lime)}
+.tcard:hover .tcard-photo img{transform:scale(1.06);filter:brightness(.85) contrast(1.15) saturate(1)}
+.tcard-photo::after{content:'';position:absolute;inset:0;background:linear-gradient(transparent 50%,rgba(8,8,8,.9))}
+.tcard-info{padding:18px 4px}
+.tcard-info h4{font-family:var(--font-head);font-size:28px;font-weight:800;letter-spacing:1px;text-transform:uppercase;line-height:1}
+.tcard-info p{font-family:var(--font-ui);font-size:15px;letter-spacing:3px;text-transform:uppercase;color:var(--lime);margin-top:2px}
+
+/* ====================== CTA ====================== */
+.cta-sec{text-align:center;padding:180px 60px;position:relative;overflow:hidden}
+.cta-glow{position:absolute;top:50%;left:50%;width:500px;height:500px;transform:translate(-50%,-50%);background:radial-gradient(circle,rgba(200,255,0,.07),transparent 70%);border-radius:50%;animation:ctaPulse 4s infinite alternate}
+@keyframes ctaPulse{0%{transform:translate(-50%,-50%) scale(1)}100%{transform:translate(-50%,-50%) scale(1.4)}}
+.cta-sec h2{font-family:var(--font-display);font-size:clamp(50px,8vw,120px);text-transform:uppercase;line-height:.9;margin-bottom:24px;position:relative;z-index:2}
+.cta-sec h2 .glow{color:var(--lime);text-shadow:0 0 40px rgba(200,255,0,.4)}
+.cta-sec p{font-size:19px;color:var(--gray);margin-bottom:36px;position:relative;z-index:2;font-family:var(--font-body)}
+
+/* ====================== FOOTER ====================== */
+footer{border-top:1px solid rgba(255,255,255,.05);padding:60px 60px 30px;display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:40px}
+footer .logo{margin-bottom:14px;display:inline-block}
+footer p{color:var(--gray);font-size:14px;line-height:1.8}
+footer h5{font-family:var(--font-ui);font-size:16px;letter-spacing:4px;text-transform:uppercase;color:var(--lime);margin-bottom:14px}
+footer a{color:var(--gray);text-decoration:none;display:block;margin-bottom:7px;font-size:14px;transition:.3s}
+footer a:hover{color:var(--lime)}
+.fbot{grid-column:1/-1;border-top:1px solid rgba(255,255,255,.04);padding-top:20px;text-align:center;color:var(--gray);font-family:var(--font-ui);font-size:14px;letter-spacing:4px}
+
+/* ====================== CART MODAL ====================== */
+.cart-overlay{position:fixed;inset:0;background:rgba(0,0,0,.65);z-index:200;opacity:0;visibility:hidden;transition:.3s;backdrop-filter:blur(10px)}
+.cart-overlay.open{opacity:1;visibility:visible}
+.cart-modal{position:fixed;top:0;right:-480px;width:460px;max-width:92vw;height:100%;background:var(--dark);z-index:201;transition:.4s cubic-bezier(.4,0,.2,1);padding:40px;overflow-y:auto;border-left:2px solid rgba(200,255,0,.15)}
+.cart-modal.open{right:0}
+.cart-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:36px}
+.cart-header h3{font-family:var(--font-display);font-size:32px;letter-spacing:2px;text-transform:uppercase}
+.cart-close{background:none;border:none;color:var(--white);font-size:30px;cursor:pointer;transition:.3s;line-height:1}
+.cart-close:hover{color:var(--red);transform:rotate(90deg)}
+.cart-empty{text-align:center;padding:60px 0;color:var(--gray);font-size:16px;font-family:var(--font-ui);letter-spacing:2px}
+.cart-item{display:flex;justify-content:space-between;align-items:center;padding:18px 0;border-bottom:1px solid rgba(255,255,255,.05)}
+.cart-item-name{font-family:var(--font-ui);font-size:18px;letter-spacing:2px}
+.cart-item-price{font-family:var(--font-display);font-size:26px;color:var(--lime)}
+.cart-item-remove{background:none;border:none;color:var(--red);cursor:pointer;font-size:18px;transition:.3s;margin-left:14px;font-family:var(--font-body)}
+.cart-item-remove:hover{transform:scale(1.3)}
+.cart-total{margin-top:28px;padding-top:18px;border-top:2px solid var(--lime);display:flex;justify-content:space-between;align-items:center}
+.cart-total-label{font-family:var(--font-ui);font-size:18px;letter-spacing:4px;text-transform:uppercase;color:var(--gray)}
+.cart-total-amount{font-family:var(--font-display);font-size:44px;color:var(--lime)}
+.cart-checkout{width:100%;margin-top:24px;padding:16px;background:var(--lime);color:var(--black);font-family:var(--font-ui);font-size:18px;font-weight:600;letter-spacing:4px;text-transform:uppercase;border:none;cursor:pointer;transition:.3s;clip-path:polygon(0 0,calc(100% - 14px) 0,100% 14px,100% 100%,14px 100%,0 calc(100% - 14px))}
+.cart-checkout:hover{background:var(--blue)}
+
+
+/* ====================== SUCCESS MODAL ====================== */
+.modal-overlay{position:fixed;inset:0;background:rgba(8,8,8,0.7);backdrop-filter:blur(8px);z-index:10000;display:flex;align-items:center;justify-content:center;opacity:0;visibility:hidden;transition:all 0.4s}
+.modal-overlay.active{opacity:1;visibility:visible}
+.modal-box{background:var(--dark);border:2px solid rgba(200,255,0,0.15);padding:3rem 2.5rem;text-align:center;max-width:420px;width:92%;transform:scale(0.9) translateY(20px);transition:transform 0.4s cubic-bezier(0.22,1,0.36,1)}
+.modal-overlay.active .modal-box{transform:scale(1) translateY(0)}
+.modal-check{width:56px;height:56px;margin:0 auto 1.2rem}
+.modal-check circle{fill:none;stroke:var(--lime);stroke-width:2;stroke-dasharray:166;stroke-dashoffset:166;animation:modC 0.6s ease 0.2s forwards}
+.modal-check polyline{fill:none;stroke:var(--lime);stroke-width:3;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:48;stroke-dashoffset:48;animation:modT 0.4s ease 0.7s forwards}
+@keyframes modC{to{stroke-dashoffset:0}}
+@keyframes modT{to{stroke-dashoffset:0}}
+.modal-title{font-family:var(--font-display);font-size:32px;text-transform:uppercase;letter-spacing:2px;margin-bottom:0.5rem}
+.modal-text{font-size:15px;color:var(--gray);margin-bottom:1.5rem;line-height:1.7}
+.modal-close{background:var(--lime);color:var(--black);border:none;padding:14px 36px;font-family:var(--font-ui);font-size:17px;font-weight:600;letter-spacing:4px;text-transform:uppercase;cursor:pointer;transition:all 0.3s;clip-path:polygon(0 0,calc(100% - 10px) 0,100% 10px,100% 100%,10px 100%,0 calc(100% - 10px))}
+.modal-close:hover{background:var(--blue)}
+
+/* CHECKOUT FORM IN CART */
+.checkout-form{display:none;flex-direction:column;gap:14px;margin-top:20px;animation:slideUp .3s ease}
+.checkout-form.show{display:flex}
+.checkout-form input,.checkout-form select{background:var(--card);border:1px solid rgba(200,255,0,.1);color:var(--white);font-family:var(--font-body);font-size:15px;padding:14px 16px;outline:none;transition:border-color .3s}
+.checkout-form input::placeholder{color:var(--gray)}
+.checkout-form input:focus{border-color:var(--lime)}
+.cf-row{display:flex;gap:12px}
+.cf-row input,.cf-row select{flex:1}
+.cf-submit{width:100%;padding:16px;background:var(--lime);color:var(--black);font-family:var(--font-ui);font-size:18px;font-weight:600;letter-spacing:4px;text-transform:uppercase;border:none;cursor:pointer;transition:.3s;clip-path:polygon(0 0,calc(100% - 14px) 0,100% 14px,100% 100%,14px 100%,0 calc(100% - 14px))}
+.cf-submit:hover{background:var(--blue)}
+.cf-back{width:100%;padding:12px;background:none;border:1px solid rgba(255,255,255,.1);color:var(--gray);font-family:var(--font-ui);font-size:14px;letter-spacing:3px;text-transform:uppercase;cursor:pointer;transition:.3s}
+.cf-back:hover{border-color:var(--lime);color:var(--lime)}
+
+/* MAX + SCROLL TOP */
+.float-msg{position:fixed;bottom:1.5rem;right:1.5rem;width:48px;height:48px;border-radius:14px;z-index:199;overflow:hidden;box-shadow:0 4px 20px rgba(88,86,214,0.4);animation:msgP 2.5s ease-in-out infinite;transition:transform 0.3s;display:flex;align-items:center;justify-content:center}
+.float-msg:hover{transform:scale(1.1);animation:none}
+@keyframes msgP{0%,100%{box-shadow:0 4px 20px rgba(88,86,214,0.4)}50%{box-shadow:0 4px 30px rgba(88,86,214,0.6)}}
+.scroll-top{position:fixed;bottom:1.5rem;right:5rem;width:40px;height:40px;background:var(--dark);border:1px solid rgba(200,255,0,.15);color:var(--lime);display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:199;opacity:0;visibility:hidden;transition:all 0.3s;text-decoration:none;clip-path:polygon(0 0,calc(100% - 6px) 0,100% 6px,100% 100%,6px 100%,0 calc(100% - 6px))}
+.scroll-top.visible{opacity:1;visibility:visible}
+.scroll-top:hover{background:rgba(200,255,0,.08);border-color:var(--lime)}
+@media(max-width:768px){
+.float-msg{width:44px;height:44px;border-radius:12px;bottom:1rem;right:1rem}
+.scroll-top{bottom:1rem;right:4.5rem}
+.checkout-form .cf-row{flex-direction:column;gap:14px}
+}
+
+/* ====================== REVEAL ====================== */
+.rv{opacity:0;transform:translateY(40px);transition:.7s cubic-bezier(.4,0,.2,1);animation:rvFB .7s ease 2.5s forwards}
+@keyframes rvFB{to{opacity:1;transform:none}}
+.rv.vis{opacity:1;transform:translateY(0);animation:none}
+
+/* ====================== RESPONSIVE ====================== */
+@media(max-width:1100px){
+.about-grid{grid-template-columns:1fr}
+.prog-grid,.price-grid{grid-template-columns:1fr 1fr}
+.train-grid{grid-template-columns:1fr 1fr}
+.hero-stats{position:relative;right:auto;bottom:auto;flex-direction:row;gap:30px;margin-top:36px}
+.stat{text-align:left;padding-right:0;border-right:0;padding-left:16px;border-left:3px solid var(--lime)}
+}
+@media(max-width:768px){
+nav{padding:14px 20px}
+.nav-links a{display:none}
+section,.hero,.cta-sec{padding-left:20px;padding-right:20px}
+.hero{padding:0 20px}
+.prog-grid,.price-grid{grid-template-columns:1fr}
+.train-grid{grid-template-columns:1fr 1fr}
+footer{grid-template-columns:1fr;padding:40px 20px 20px}
+.hero-stats{flex-direction:column;gap:16px}
+}
+</style>
+    <script type="application/ld+json">
+    {"@context":"https://schema.org","@type":"SportsActivityLocation","name":"PULSE","image":"images/hero-bg.png","address":{"@type":"PostalAddress","streetAddress":"ул. Тверская 24","addressLocality":"Москва","addressCountry":"RU"},"telephone":"+7 (495) 123-45-67"}
+    </script>
+</head>
+<body>
+
+<!-- LOADER -->
+<div class="loader" id="loader">
+  <div class="loader-text">PULSE</div>
+  <div class="loader-bar"><div class="loader-bar-fill"></div></div>
+</div>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="logo">PULSE<em>.</em></a>
+  <div class="nav-links">
+    <a href="#programs">Программы</a>
+    <a href="#schedule">Расписание</a>
+    <a href="#pricing">Абонементы</a>
+    <a href="#trainers">Тренеры</a>
+    <button class="cart-btn" onclick="toggleCart()">
+      Корзина
+      <span class="cart-count empty" id="cartCount">0</span>
+    </button>
+  </div>
+</nav>
+
+<!-- ========== HERO ========== -->
+<section class="hero">
+  <div class="hero-bg-img"></div>
+  <div class="hero-scanlines"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-content">
+    <div class="hero-tag">Кроссфит & Фитнес Студия</div>
+    <h1>
+      Сломай<br>
+      <span class="outline">свои</span><br>
+      <span class="glow">лимиты</span>
+    </h1>
+    <p class="hero-desc">Современный кроссфит-зал с профессиональными тренерами. Результат начинается с первого шага внутрь.</p>
+    <a href="#pricing" class="hero-cta">Начать сейчас</a>
+  </div>
+  <div class="hero-stats">
+    <div class="stat"><div class="stat-num" data-target="2400">0</div><div class="stat-label">Атлетов</div></div>
+    <div class="stat"><div class="stat-num" data-target="12">0</div><div class="stat-label">Тренеров</div></div>
+    <div class="stat"><div class="stat-num" data-target="97">0</div><div class="stat-label">% Довольных</div></div>
+  </div>
+</section>
+
+<!-- ========== ABOUT ========== -->
+<section id="about">
+  <div class="about-grid rv">
+    <div>
+      <div class="stag">О нас</div>
+      <div class="stitle">Энергия<br><span class="a">в каждом</span><br>движении</div>
+      <div class="about-text">
+        <p>PULSE — это не просто фитнес-зал. Это пространство, где каждая тренировка приближает тебя к лучшей версии себя. 800 м&sup2; оборудования мирового класса, атмосфера, которая заставляет двигаться.</p>
+        <p>Мы объединяем кроссфит, функциональный тренинг и силовые программы в единую систему, адаптированную под любой уровень подготовки.</p>
+      </div>
+    </div>
+    <div class="numbers-grid">
+      <div class="ncard"><div class="big">800</div><div class="lbl">м&sup2; площадь</div></div>
+      <div class="ncard"><div class="big">6</div><div class="lbl">лет на рынке</div></div>
+      <div class="ncard"><div class="big">50+</div><div class="lbl">тренировок/нед</div></div>
+      <div class="ncard"><div class="big">24/7</div><div class="lbl">график работы</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== PROGRAMS ========== -->
+<section id="programs">
+  <div class="stag rv">Направления</div>
+  <div class="stitle rv">Выбери свой <span class="a">формат</span></div>
+  <div class="prog-grid">
+    <div class="pcard rv">
+      <div class="pcard-img"><img src="images/prog-crossfit.png" alt="CrossFit"><div class="pcard-overlay"></div></div>
+      <div class="pcard-body">
+        <h3>CrossFit WOD</h3>
+        <p>Высокоинтенсивные тренировки дня. Каждый день — новый вызов. Функциональные движения на максимуме.</p>
+        <span class="ptag">Высокая интенсивность</span>
+      </div>
+    </div>
+    <div class="pcard rv">
+      <div class="pcard-img"><img src="images/prog-strength.png" alt="Strength"><div class="pcard-overlay"></div></div>
+      <div class="pcard-body">
+        <h3>Strength Lab</h3>
+        <p>Силовая программа для набора массы и развития максимальной силы. Штанга, гири, тяжёлая атлетика.</p>
+        <span class="ptag">Сила & Масса</span>
+      </div>
+    </div>
+    <div class="pcard rv">
+      <div class="pcard-img"><img src="images/prog-combat.png" alt="Combat"><div class="pcard-overlay"></div></div>
+      <div class="pcard-body">
+        <h3>Combat Box</h3>
+        <p>Боксёрский тренинг: работа на мешках, бой с тенью, скакалка. Координация, скорость, выносливость.</p>
+        <span class="ptag">Единоборства</span>
+      </div>
+    </div>
+    <div class="pcard rv">
+      <div class="pcard-img"><img src="images/prog-mobility.png" alt="Mobility"><div class="pcard-overlay"></div></div>
+      <div class="pcard-body">
+        <h3>Mobility Flow</h3>
+        <p>Восстановление и мобильность. Йога, растяжка, миофасциальный релиз. Необходимо для прогресса.</p>
+        <span class="ptag">Восстановление</span>
+      </div>
+    </div>
+    <div class="pcard rv">
+      <div class="pcard-img"><img src="images/prog-crossfit.png" alt="Metcon" style="object-position:center 30%"><div class="pcard-overlay"></div></div>
+      <div class="pcard-body">
+        <h3>Metcon Burn</h3>
+        <p>Метаболический кондиционинг для максимального жиросжигания. 45 минут, которые изменят тело.</p>
+        <span class="ptag">Жиросжигание</span>
+      </div>
+    </div>
+    <div class="pcard rv">
+      <div class="pcard-img"><img src="images/trainer-max.png" alt="Pro" style="object-position:center 20%"><div class="pcard-overlay"></div></div>
+      <div class="pcard-body">
+        <h3>Pro Athlete</h3>
+        <p>Индивидуальная программа для продвинутых. Персональный план, анализ техники, подготовка к соревнованиям.</p>
+        <span class="ptag">Элитный уровень</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== SCHEDULE ========== -->
+<section id="schedule">
+  <div class="stag rv">Расписание</div>
+  <div class="stitle rv">График <span class="a">тренировок</span></div>
+  <div class="sched-wrap rv">
+    <table class="sched">
+      <thead>
+        <tr><th>Время</th><th>Пн</th><th>Вт</th><th>Ср</th><th>Чт</th><th>Пт</th><th>Сб</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="time">07:00</td>
+          <td><span class="cls">CrossFit WOD</span><br><span class="trn">Макс К.</span></td>
+          <td><span class="cls">Metcon Burn</span><br><span class="trn">Алина Р.</span></td>
+          <td><span class="cls">CrossFit WOD</span><br><span class="trn">Макс К.</span></td>
+          <td><span class="cls">Strength Lab</span><br><span class="trn">Дмитрий В.</span></td>
+          <td><span class="cls">CrossFit WOD</span><br><span class="trn">Макс К.</span></td>
+          <td><span class="cls">Combat Box</span><br><span class="trn">Артём Б.</span></td>
+        </tr>
+        <tr>
+          <td class="time">09:00</td>
+          <td><span class="cls">Mobility</span><br><span class="trn">Яна С.</span></td>
+          <td><span class="cls">Strength Lab</span><br><span class="trn">Дмитрий В.</span></td>
+          <td><span class="cls">Metcon Burn</span><br><span class="trn">Алина Р.</span></td>
+          <td><span class="cls">CrossFit WOD</span><br><span class="trn">Макс К.</span></td>
+          <td><span class="cls">Strength Lab</span><br><span class="trn">Дмитрий В.</span></td>
+          <td><span class="cls">CrossFit WOD</span><br><span class="trn">Макс К.</span></td>
+        </tr>
+        <tr>
+          <td class="time">12:00</td>
+          <td><span class="cls">Metcon Burn</span><br><span class="trn">Алина Р.</span></td>
+          <td><span class="cls">Combat Box</span><br><span class="trn">Артём Б.</span></td>
+          <td><span class="cls">Strength Lab</span><br><span class="trn">Дмитрий В.</span></td>
+          <td><span class="cls">Metcon Burn</span><br><span class="trn">Алина Р.</span></td>
+          <td><span class="cls">Combat Box</span><br><span class="trn">Артём Б.</span></td>
+          <td><span class="cls">Mobility</span><br><span class="trn">Яна С.</span></td>
+        </tr>
+        <tr>
+          <td class="time">18:00</td>
+          <td><span class="cls">Strength Lab</span><br><span class="trn">Дмитрий В.</span></td>
+          <td><span class="cls">CrossFit WOD</span><br><span class="trn">Макс К.</span></td>
+          <td><span class="cls">Combat Box</span><br><span class="trn">Артём Б.</span></td>
+          <td><span class="cls">Mobility</span><br><span class="trn">Яна С.</span></td>
+          <td><span class="cls">Metcon Burn</span><br><span class="trn">Алина Р.</span></td>
+          <td style="color:#333">—</td>
+        </tr>
+        <tr>
+          <td class="time">20:00</td>
+          <td><span class="cls">CrossFit WOD</span><br><span class="trn">Макс К.</span></td>
+          <td><span class="cls">Metcon Burn</span><br><span class="trn">Алина Р.</span></td>
+          <td><span class="cls">CrossFit WOD</span><br><span class="trn">Макс К.</span></td>
+          <td><span class="cls">Strength Lab</span><br><span class="trn">Дмитрий В.</span></td>
+          <td><span class="cls">Pro Athlete</span><br><span class="trn">Макс К.</span></td>
+          <td style="color:#333">—</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ========== PRICING ========== -->
+<section id="pricing">
+  <div class="stag rv">Абонементы</div>
+  <div class="stitle rv">Инвестируй <span class="a">в себя</span></div>
+  <div class="price-grid">
+    <div class="prcard rv" data-name="STARTER" data-price="3900">
+      <div class="pr-name">Starter</div>
+      <div class="pr-price">3 900<span> P</span></div>
+      <div class="pr-period">/ месяц</div>
+      <ul class="pr-features">
+        <li>8 групповых тренировок</li>
+        <li>Доступ в зал 8:00 — 22:00</li>
+        <li>Раздевалка & душ</li>
+        <li>Вводная тренировка</li>
+      </ul>
+      <button class="add-btn" onclick="addToCart('STARTER','3 900 P',3900)">В корзину</button>
+    </div>
+    <div class="prcard pop rv" data-name="UNLIMITED" data-price="6900">
+      <div class="badge">Hit</div>
+      <div class="pr-name">Unlimited</div>
+      <div class="pr-price">6 900<span> P</span></div>
+      <div class="pr-period">/ месяц</div>
+      <ul class="pr-features">
+        <li>Безлимитные тренировки</li>
+        <li>Доступ 24/7</li>
+        <li>Все направления</li>
+        <li>Nutrition-план</li>
+        <li>1 персональная тренировка</li>
+      </ul>
+      <button class="add-btn" onclick="addToCart('UNLIMITED','6 900 P',6900)">В корзину</button>
+    </div>
+    <div class="prcard rv" data-name="PRO ATHLETE" data-price="12900">
+      <div class="pr-name">Pro Athlete</div>
+      <div class="pr-price">12 900<span> P</span></div>
+      <div class="pr-period">/ месяц</div>
+      <ul class="pr-features">
+        <li>Всё из Unlimited</li>
+        <li>4 персональных тренировки</li>
+        <li>Анализ техники (видео)</li>
+        <li>Индивидуальный план</li>
+        <li>Приоритетная запись</li>
+      </ul>
+      <button class="add-btn" onclick="addToCart('PRO ATHLETE','12 900 P',12900)">В корзину</button>
+    </div>
+  </div>
+</section>
+
+<!-- ========== TRAINERS ========== -->
+<section id="trainers">
+  <div class="stag rv">Команда</div>
+  <div class="stitle rv">Наши <span class="a">тренеры</span></div>
+  <div class="train-grid">
+    <div class="tcard rv">
+      <div class="tcard-photo"><img src="images/trainer-max.png" alt="Макс Козлов"></div>
+      <div class="tcard-info"><h4>Макс Козлов</h4><p>Head Coach / CrossFit L3</p></div>
+    </div>
+    <div class="tcard rv">
+      <div class="tcard-photo"><img src="images/trainer-alina.png" alt="Алина Рыжова"></div>
+      <div class="tcard-info"><h4>Алина Рыжова</h4><p>Metcon / Functional</p></div>
+    </div>
+    <div class="tcard rv">
+      <div class="tcard-photo"><img src="images/trainer-dmitriy.png" alt="Дмитрий Волков"></div>
+      <div class="tcard-info"><h4>Дмитрий Волков</h4><p>Strength & Conditioning</p></div>
+    </div>
+    <div class="tcard rv">
+      <div class="tcard-photo"><img src="images/trainer-artem.png" alt="Артём Белов"></div>
+      <div class="tcard-info"><h4>Артём Белов</h4><p>Combat / Boxing Coach</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== CTA ========== -->
+<section class="cta-sec">
+  <div class="cta-glow"></div>
+  <div class="rv">
+    <h2><span class="glow">Готов</span> к переменам?</h2>
+    <p>Первая тренировка — бесплатно. Без обязательств.</p>
+    <a href="#pricing" class="hero-cta">Записаться</a>
+  </div>
+</section>
+
+<!-- ========== FOOTER ========== -->
+<footer>
+  <div>
+    <div class="logo" style="margin-bottom:14px">PULSE<em>.</em></div>
+    <p>Кроссфит & фитнес-студия нового формата.<br>Энергия, движение, результат.</p>
+  </div>
+  <div>
+    <h5>Навигация</h5>
+    <a href="#programs">Программы</a>
+    <a href="#schedule">Расписание</a>
+    <a href="#pricing">Абонементы</a>
+    <a href="#trainers">Тренеры</a>
+  </div>
+  <div>
+    <h5>Контакты</h5>
+    <p>ул. Тверская 24, Москва<br>+7 (495) 123-45-67<br>hello@pulse.fit</p>
+  </div>
+  <div class="fbot">PULSE 2026 &mdash; Все права защищены</div>
+</footer>
+
+<!-- ========== CART ========== -->
+<div class="cart-overlay" id="cartOverlay" onclick="toggleCart()"></div>
+<div class="cart-modal" id="cartModal">
+  <div class="cart-header">
+    <h3>Корзина</h3>
+    <button class="cart-close" onclick="toggleCart()">&times;</button>
+  </div>
+  <div id="cartItems"></div>
+  <div id="cartFooter" style="display:none">
+    <div class="cart-total">
+      <span class="cart-total-label">Итого</span>
+      <span class="cart-total-amount" id="cartTotal">0 P</span>
+    </div>
+    <button class="cart-checkout" id="checkoutBtn" onclick="showCheckout()">Оформить заказ</button>
+    <div class="checkout-form" id="checkoutForm">
+      <input type="text" id="cfName" placeholder="Имя" required>
+      <input type="tel" id="cfPhone" placeholder="Телефон" required>
+      <input type="text" id="cfEmail" placeholder="Email (необязательно)">
+      <button class="cf-submit" onclick="submitOrder()">Подтвердить заказ</button>
+      <button class="cf-back" onclick="hideCheckout()">Назад</button>
+    </div>
+  </div>
+</div>
+
+
+<!-- Success Modal -->
+<div class="modal-overlay" id="successModal" onclick="closeModal(event)">
+  <div class="modal-box">
+    <svg class="modal-check" viewBox="0 0 52 52"><circle cx="26" cy="26" r="25"/><polyline points="16 26 23 33 36 20"/></svg>
+    <p class="modal-title">Заказ оформлен</p>
+    <p class="modal-text">Мы свяжемся с вами для подтверждения абонемента.</p>
+    <button class="modal-close" onclick="document.getElementById('successModal').classList.remove('active')">Понял</button>
+  </div>
+</div>
+
+<!-- Max Messenger -->
+<a href="https://max.ru/" target="_blank" class="float-msg" aria-label="Max Messenger">
+    <img id="maxIcon" alt="Max" style="width:100%;height:100%;border-radius:4px">
+</a>
+
+<!-- Scroll to Top -->
+<a href="javascript:void(0)" onclick="window.scrollTo({top:0,behavior:'smooth'})" class="scroll-top" id="scrollTop" aria-label="Наверх">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 15l-6-6-6 6"/></svg>
+</a>
+
+<script>
+function hideLoader(){document.getElementById('loader').classList.add('hidden')}
+window.addEventListener('load',()=>setTimeout(hideLoader,1100));
+setTimeout(hideLoader,2500);
+
+// Counters
+function animCounters(){
+  document.querySelectorAll('.stat-num[data-target]').forEach(el=>{
+    const t=+el.dataset.target,d=1800,s=performance.now();
+    !function u(n){const p=Math.min((n-s)/d,1),e=1-Math.pow(1-p,3);el.textContent=Math.floor(t*e).toLocaleString();p<1&&requestAnimationFrame(u)}(s);
+  });
+}
+setTimeout(animCounters,1300);
+
+// Scroll reveal
+const obs=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('vis');obs.unobserve(x.target)}}),{threshold:.12});
+document.querySelectorAll('.rv').forEach(e=>obs.observe(e));
+
+// Cart
+let cart=[];
+function upd(){
+  const c=document.getElementById('cartCount'),i=document.getElementById('cartItems'),f=document.getElementById('cartFooter'),t=document.getElementById('cartTotal');
+  c.textContent=cart.length;c.classList.toggle('empty',!cart.length);
+  if(!cart.length){i.innerHTML='<div class="cart-empty">Корзина пуста</div>';f.style.display='none'}
+  else{
+    i.innerHTML=cart.map((x,n)=>`<div class="cart-item"><span class="cart-item-name">${x.name}</span><div style="display:flex;align-items:center"><span class="cart-item-price">${x.pt}</span><button class="cart-item-remove" onclick="rem(${n})">&#10005;</button></div></div>`).join('');
+    t.textContent=cart.reduce((s,x)=>s+x.p,0).toLocaleString()+' P';f.style.display='block';
+  }
+  document.querySelectorAll('.add-btn').forEach(b=>{
+    const c2=b.closest('.prcard');if(!c2)return;
+    const n=c2.dataset.name,has=cart.some(x=>x.name===n);
+    b.textContent=has?'Добавлено':'В корзину';b.classList.toggle('added',has);
+  });
+}
+function addToCart(n,pt,p){if(cart.some(x=>x.name===n))return;cart.push({name:n,pt,p});upd();
+
+// Max icon
+document.getElementById("maxIcon").src="data:image/jpeg;base64,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";
+
+// Scroll to top
+window.addEventListener("scroll",()=>{
+  document.getElementById("scrollTop").classList.toggle("visible",window.scrollY>500);
+});
+
+// Checkout form
+function showCheckout(){
+  document.getElementById('checkoutBtn').style.display='none';
+  document.getElementById('checkoutForm').classList.add('show');
+}
+function hideCheckout(){
+  document.getElementById('checkoutBtn').style.display='';
+  document.getElementById('checkoutForm').classList.remove('show');
+}
+function submitOrder(){
+  const name=document.getElementById('cfName').value;
+  const phone=document.getElementById('cfPhone').value;
+  if(!name||!phone){return}
+
+  /* === TELEGRAM BOT API ===
+  const BOT_TOKEN='YOUR_BOT_TOKEN';
+  const CHAT_ID='YOUR_CHAT_ID';
+  const items=cart.map(c=>c.name+' '+c.pt).join(', ');
+  const total=cart.reduce((s,c)=>s+c.p,0);
+  const email=document.getElementById('cfEmail').value||'-';
+  const text='Заказ PULSE:%0A'+
+    'Имя: '+name+'%0AТел: '+phone+'%0AEmail: '+email+'%0A'+
+    'Абонементы: '+items+'%0AИтого: '+total+' P';
+  fetch('https://api.telegram.org/bot'+BOT_TOKEN+'/sendMessage?chat_id='+CHAT_ID+'&text='+text);
+  === END === */
+
+  toggleCart();
+  hideCheckout();
+  document.getElementById('successModal').classList.add('active');
+  cart=[];upd();
+  ['cfName','cfPhone','cfEmail'].forEach(id=>{document.getElementById(id).value=''});
+}
+function closeModal(e){if(e.target===e.currentTarget)e.currentTarget.classList.remove('active')}
+
+// Smooth scroll
+document.querySelectorAll('a[href^="#"]').forEach(a=>{
+  a.addEventListener('click',function(e){e.preventDefault();const t=document.querySelector(this.getAttribute('href'));if(t)t.scrollIntoView({behavior:'smooth'})});
+});
+
+  const b=document.querySelector('.cart-btn');b.style.boxShadow='0 0 30px var(--lime)';setTimeout(()=>b.style.boxShadow='none',400);
+}
+function rem(i){cart.splice(i,1);upd()}
+function toggleCart(){document.getElementById('cartOverlay').classList.toggle('open');document.getElementById('cartModal').classList.toggle('open')}
+upd();
+
+// Max icon
+document.getElementById("maxIcon").src="data:image/jpeg;base64,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";
+
+// Scroll to top
+window.addEventListener("scroll",()=>{
+  document.getElementById("scrollTop").classList.toggle("visible",window.scrollY>500);
+});
+
+// Checkout form
+function showCheckout(){
+  document.getElementById('checkoutBtn').style.display='none';
+  document.getElementById('checkoutForm').classList.add('show');
+}
+function hideCheckout(){
+  document.getElementById('checkoutBtn').style.display='';
+  document.getElementById('checkoutForm').classList.remove('show');
+}
+function submitOrder(){
+  const name=document.getElementById('cfName').value;
+  const phone=document.getElementById('cfPhone').value;
+  if(!name||!phone){return}
+
+  /* === TELEGRAM BOT API ===
+  const BOT_TOKEN='YOUR_BOT_TOKEN';
+  const CHAT_ID='YOUR_CHAT_ID';
+  const items=cart.map(c=>c.name+' '+c.pt).join(', ');
+  const total=cart.reduce((s,c)=>s+c.p,0);
+  const email=document.getElementById('cfEmail').value||'-';
+  const text='Заказ PULSE:%0A'+
+    'Имя: '+name+'%0AТел: '+phone+'%0AEmail: '+email+'%0A'+
+    'Абонементы: '+items+'%0AИтого: '+total+' P';
+  fetch('https://api.telegram.org/bot'+BOT_TOKEN+'/sendMessage?chat_id='+CHAT_ID+'&text='+text);
+  === END === */
+
+  toggleCart();
+  hideCheckout();
+  document.getElementById('successModal').classList.add('active');
+  cart=[];upd();
+  ['cfName','cfPhone','cfEmail'].forEach(id=>{document.getElementById(id).value=''});
+}
+function closeModal(e){if(e.target===e.currentTarget)e.currentTarget.classList.remove('active')}
+
+// Smooth scroll
+document.querySelectorAll('a[href^="#"]').forEach(a=>{
+  a.addEventListener('click',function(e){e.preventDefault();const t=document.querySelector(this.getAttribute('href'));if(t)t.scrollIntoView({behavior:'smooth'})});
+});
+
+</script>
+</body>
+</html>
