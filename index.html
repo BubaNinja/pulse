@@ -281,10 +281,11 @@ function submitTrial(){
   var name=document.getElementById('trialName').value;
   var phone=document.getElementById('trialPhone').value;
   var prog=document.getElementById('trialProg').value;
+  var level=document.getElementById('trialLevel').value;
   if(!name||!phone){return}
 
   /* === TELEGRAM BOT API ===
-  var text='Пробная тренировка PULSE:%0AIмя: '+name+'%0AТел: '+phone+'%0AНаправление: '+(prog||'не выбрано');
+  var text='Пробная тренировка PULSE:%0AIмя: '+name+'%0AТел: '+phone+'%0AНаправление: '+(prog||'не выбрано')+'%0AУровень: '+(level||'не выбран');
   fetch('https://api.telegram.org/bot'+BOT_TOKEN+'/sendMessage?chat_id='+CHAT_ID+'&text='+text);
   === END === */
 
@@ -294,6 +295,7 @@ function submitTrial(){
   document.getElementById('trialName').value='';
   document.getElementById('trialPhone').value='';
   document.getElementById('trialProg').value='';
+  document.getElementById('trialLevel').value='';
 }
 </script>
 </head>
@@ -479,6 +481,37 @@ function submitTrial(){
   </div>
 </section>
 
+<!-- ========== TRIAL ========== -->
+<section id="trial" style="border-top:1px solid rgba(200,255,0,.08)">
+  <div class="stag rv">Пробная тренировка</div>
+  <div class="stitle rv">Первый шаг — <span class="a">бесплатно</span></div>
+  <div style="max-width:600px" class="rv">
+    <p style="color:var(--light-gray);font-size:17px;line-height:1.8;margin-bottom:28px">Запишись на бесплатную пробную тренировку. Выбери направление и свой уровень -- мы подберём группу и тренера.</p>
+    <div style="display:flex;flex-direction:column;gap:14px;background:var(--card);border:1px solid rgba(200,255,0,.08);padding:32px">
+      <div style="display:flex;gap:14px;flex-wrap:wrap">
+        <input type="text" id="trialName" placeholder="Имя" style="flex:1;min-width:200px;background:var(--dark);border:1px solid rgba(200,255,0,.1);color:var(--white);font-family:var(--font-body);font-size:15px;padding:14px 16px;outline:none">
+        <input type="tel" id="trialPhone" placeholder="Телефон" style="flex:1;min-width:200px;background:var(--dark);border:1px solid rgba(200,255,0,.1);color:var(--white);font-family:var(--font-body);font-size:15px;padding:14px 16px;outline:none">
+      </div>
+      <select id="trialProg" style="background:var(--dark);border:1px solid rgba(200,255,0,.1);color:var(--white);font-family:var(--font-body);font-size:15px;padding:14px 16px;outline:none;appearance:none;cursor:pointer">
+        <option value="">Выбери направление</option>
+        <option>CrossFit WOD</option>
+        <option>Strength Lab</option>
+        <option>Combat Box</option>
+        <option>Mobility Flow</option>
+        <option>Metcon Burn</option>
+      </select>
+      <select id="trialLevel" style="background:var(--dark);border:1px solid rgba(200,255,0,.1);color:var(--white);font-family:var(--font-body);font-size:15px;padding:14px 16px;outline:none;appearance:none;cursor:pointer">
+        <option value="">Твой уровень</option>
+        <option>Новичок (первый раз)</option>
+        <option>Начинающий (до 6 месяцев)</option>
+        <option>Средний (6-24 месяца)</option>
+        <option>Продвинутый (2+ года)</option>
+      </select>
+      <button onclick="submitTrial()" style="padding:16px;background:var(--lime);color:var(--black);font-family:var(--font-ui);font-size:18px;font-weight:600;letter-spacing:4px;text-transform:uppercase;border:none;cursor:pointer;transition:.3s;clip-path:polygon(0 0,calc(100% - 14px) 0,100% 14px,100% 100%,14px 100%,0 calc(100% - 14px))">Записаться бесплатно</button>
+    </div>
+  </div>
+</section>
+
 <!-- ========== PRICING ========== -->
 <section id="pricing">
   <div class="stag rv">Абонементы</div>
@@ -550,30 +583,6 @@ function submitTrial(){
   </div>
 </section>
 
-
-<!-- ========== TRIAL ========== -->
-<section id="trial" style="border-top:1px solid rgba(200,255,0,.08)">
-  <div class="stag rv">Пробная тренировка</div>
-  <div class="stitle rv">Первый шаг — <span class="a">бесплатно</span></div>
-  <div style="max-width:600px" class="rv">
-    <p style="color:var(--light-gray);font-size:17px;line-height:1.8;margin-bottom:28px">Запишись на бесплатную пробную тренировку. Выбери направление, а мы подберём группу и тренера под твой уровень.</p>
-    <div style="display:flex;flex-direction:column;gap:14px;background:var(--card);border:1px solid rgba(200,255,0,.08);padding:32px">
-      <div style="display:flex;gap:14px;flex-wrap:wrap">
-        <input type="text" id="trialName" placeholder="Имя" style="flex:1;min-width:200px;background:var(--dark);border:1px solid rgba(200,255,0,.1);color:var(--white);font-family:var(--font-body);font-size:15px;padding:14px 16px;outline:none">
-        <input type="tel" id="trialPhone" placeholder="Телефон" style="flex:1;min-width:200px;background:var(--dark);border:1px solid rgba(200,255,0,.1);color:var(--white);font-family:var(--font-body);font-size:15px;padding:14px 16px;outline:none">
-      </div>
-      <select id="trialProg" style="background:var(--dark);border:1px solid rgba(200,255,0,.1);color:var(--white);font-family:var(--font-body);font-size:15px;padding:14px 16px;outline:none;appearance:none;cursor:pointer">
-        <option value="">Выбери направление</option>
-        <option>CrossFit WOD</option>
-        <option>Strength Lab</option>
-        <option>Combat Box</option>
-        <option>Mobility Flow</option>
-        <option>Metcon Burn</option>
-      </select>
-      <button onclick="submitTrial()" style="padding:16px;background:var(--lime);color:var(--black);font-family:var(--font-ui);font-size:18px;font-weight:600;letter-spacing:4px;text-transform:uppercase;border:none;cursor:pointer;transition:.3s;clip-path:polygon(0 0,calc(100% - 14px) 0,100% 14px,100% 100%,14px 100%,0 calc(100% - 14px))">Записаться бесплатно</button>
-    </div>
-  </div>
-</section>
 
 <!-- ========== CTA ========== -->
 <section class="cta-sec">
@@ -681,10 +690,10 @@ function upd(){
   document.querySelectorAll('.add-btn').forEach(b=>{
     const c2=b.closest('.prcard');if(!c2)return;
     const n=c2.dataset.name,has=cart.some(x=>x.name===n);
-    if(has){b.textContent='Перейти в корзину';b.classList.add('added');b.onclick=function(){toggleCart()}}else{b.textContent='В корзину';b.classList.remove('added');b.onclick=null}
+    b.textContent=has?'Перейти в корзину':'В корзину';b.classList.toggle('added',has)
   });
 }
-function addToCart(n,pt,p){if(cart.some(x=>x.name===n))return;cart.push({name:n,pt,p});upd();
+function addToCart(n,pt,p){if(cart.some(x=>x.name===n)){toggleCart();return};cart.push({name:n,pt,p});upd();
   const b=document.querySelector('.cart-btn');b.style.boxShadow='0 0 30px var(--lime)';setTimeout(()=>b.style.boxShadow='none',400);
 }
 function rem(i){cart.splice(i,1);upd()}
@@ -789,10 +798,11 @@ function submitTrial(){
   var name=document.getElementById('trialName').value;
   var phone=document.getElementById('trialPhone').value;
   var prog=document.getElementById('trialProg').value;
+  var level=document.getElementById('trialLevel').value;
   if(!name||!phone){return}
 
   /* === TELEGRAM BOT API ===
-  var text='Пробная тренировка PULSE:%0AIмя: '+name+'%0AТел: '+phone+'%0AНаправление: '+(prog||'не выбрано');
+  var text='Пробная тренировка PULSE:%0AIмя: '+name+'%0AТел: '+phone+'%0AНаправление: '+(prog||'не выбрано')+'%0AУровень: '+(level||'не выбран');
   fetch('https://api.telegram.org/bot'+BOT_TOKEN+'/sendMessage?chat_id='+CHAT_ID+'&text='+text);
   === END === */
 
@@ -802,6 +812,7 @@ function submitTrial(){
   document.getElementById('trialName').value='';
   document.getElementById('trialPhone').value='';
   document.getElementById('trialProg').value='';
+  document.getElementById('trialLevel').value='';
 }
 </script>
 </body>
